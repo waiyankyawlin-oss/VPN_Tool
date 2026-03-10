@@ -1003,20 +1003,46 @@ echo "Add this server to your TeamVPN Admin Panel."`;
 
                   <div className="bg-white p-8 rounded-3xl border border-[#E5E7EB] shadow-sm">
                     <div className="w-10 h-10 bg-[#0078D4] text-white rounded-full flex items-center justify-center font-bold mb-6">3</div>
-                    <h3 className="text-xl font-bold text-[#111827] mb-4">Self-Hosting the Dashboard</h3>
+                    <h3 className="text-xl font-bold text-[#111827] mb-4">Deploy to DigitalOcean</h3>
                     <p className="text-[#6B7280] text-sm leading-relaxed mb-4">
-                      If you want to host this dashboard on your own DigitalOcean server (to avoid "Not Found" errors or for better control), run these commands on your server:
+                      To move this dashboard from your laptop to a live web server on DigitalOcean, follow these steps on your droplet:
                     </p>
-                    <div className="p-4 bg-[#1A1A1A] rounded-2xl relative group">
-                      <code className="text-[10px] text-emerald-400 font-mono break-all leading-relaxed">
-                        {`# Install Node.js\ncurl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -\nsudo apt-get install -y nodejs\n\n# Clone and Start (Example)\ngit clone https://github.com/your-repo/team-vpn.git\ncd team-vpn\nnpm install\nnpm run build\nnpm start`}
-                      </code>
-                      <button 
-                        onClick={() => copyToClipboard(`# Install Node.js\ncurl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -\nsudo apt-get install -y nodejs\n\n# Clone and Start\ngit clone https://github.com/your-repo/team-vpn.git\ncd team-vpn\nnpm install\nnpm run build\nnpm start`, 777)}
-                        className="absolute right-3 top-3 p-2 bg-white/10 border border-white/10 rounded-lg hover:bg-white/20 transition-all"
-                      >
-                        {copiedId === 777 ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-white/60" />}
-                      </button>
+                    <div className="space-y-4">
+                      <div>
+                        <p className="text-xs font-bold text-[#111827] mb-2 uppercase tracking-wider">1. Install Node.js & PM2</p>
+                        <div className="p-4 bg-[#1A1A1A] rounded-2xl relative group">
+                          <code className="text-[10px] text-emerald-400 font-mono break-all leading-relaxed">
+                            {`curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -\nsudo apt-get install -y nodejs\nsudo npm install -g pm2`}
+                          </code>
+                          <button 
+                            onClick={() => copyToClipboard(`curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -\nsudo apt-get install -y nodejs\nsudo npm install -g pm2`, 777)}
+                            className="absolute right-3 top-3 p-2 bg-white/10 border border-white/10 rounded-lg hover:bg-white/20 transition-all"
+                          >
+                            {copiedId === 777 ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-white/60" />}
+                          </button>
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className="text-xs font-bold text-[#111827] mb-2 uppercase tracking-wider">2. Clone & Start App</p>
+                        <div className="p-4 bg-[#1A1A1A] rounded-2xl relative group">
+                          <code className="text-[10px] text-emerald-400 font-mono break-all leading-relaxed">
+                            {`git clone https://github.com/waiyankyawlin-oss/VPN.git\ncd VPN\nnpm install\nnpm run build\npm2 start server.ts --name "vpn-dashboard" --interpreter tsx\npm2 save\npm2 startup`}
+                          </code>
+                          <button 
+                            onClick={() => copyToClipboard(`git clone https://github.com/waiyankyawlin-oss/VPN.git\ncd VPN\nnpm install\nnpm run build\npm2 start server.ts --name "vpn-dashboard" --interpreter tsx\npm2 save\npm2 startup`, 888)}
+                            className="absolute right-3 top-3 p-2 bg-white/10 border border-white/10 rounded-lg hover:bg-white/20 transition-all"
+                          >
+                            {copiedId === 888 ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-white/60" />}
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl">
+                        <p className="text-xs text-amber-800 leading-relaxed">
+                          <strong>Note:</strong> After running these, your dashboard will be live at <code>http://your-droplet-ip:3000</code>. Remember to allow port 3000 in your DigitalOcean firewall (UFW).
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>

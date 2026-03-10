@@ -1,0 +1,5 @@
+{
+  "name": "TeamVPN Admin",
+  "description": "A lightweight VPN management dashboard for Shadowsocks-based team access.",
+  "requestFramePermissions": []
+}

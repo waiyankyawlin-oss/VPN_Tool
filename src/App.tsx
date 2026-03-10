@@ -998,6 +998,34 @@ echo "Add this server to your TeamVPN Admin Panel."`;
                           </button>
                         </div>
                       </div>
+
+                      <div className="bg-emerald-50/50 p-6 rounded-2xl border border-emerald-100">
+                        <p className="text-xs font-bold text-emerald-800 mb-4 uppercase tracking-wider flex items-center gap-2">
+                          <Terminal className="w-4 h-4" />
+                          Manual Info Cheat Sheet
+                        </p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {[
+                            { label: 'Get IP Address', cmd: 'curl -s ifconfig.me' },
+                            { label: 'Get Port', cmd: 'sudo grep \'"server_port"\' /etc/shadowsocks-libev/config.json' },
+                            { label: 'Get Method', cmd: 'sudo grep \'"method"\' /etc/shadowsocks-libev/config.json' },
+                            { label: 'Get Password', cmd: 'sudo grep \'"password"\' /etc/shadowsocks-libev/config.json' }
+                          ].map((item, i) => (
+                            <div key={i} className="space-y-1">
+                              <p className="text-[10px] font-bold text-emerald-700 uppercase">{item.label}</p>
+                              <div className="flex items-center gap-2 bg-white p-2 rounded-lg border border-emerald-100">
+                                <code className="text-[10px] text-emerald-600 font-mono truncate flex-1">{item.cmd}</code>
+                                <button 
+                                  onClick={() => copyToClipboard(item.cmd, 900 + i)}
+                                  className="p-1 hover:bg-emerald-50 rounded transition-colors"
+                                >
+                                  {copiedId === 900 + i ? <CheckCircle2 className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3 text-emerald-400" />}
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
 
